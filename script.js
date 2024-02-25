@@ -96,3 +96,5 @@ function playGame() {
 }
 
 playGame();
+
+//rewrite the following code above but in simpler more cleaner code
