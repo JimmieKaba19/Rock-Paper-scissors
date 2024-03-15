@@ -4,10 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            background-color: #1f2937;
+            padding: 30px 50px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #e5e7eb;
+        }
+        .play {
+            margin-top: 50px;
+            background-color: #3882f6;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        button {
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: none;
+            font-size: 18px;
+            background-color: #1f2937;
+            color: white;
+            transition: 400ms;
+        }
+
+        button:hover {
+            color: #3882f6;
+        }
+        @media only screen and (max-width: 720px) {
+            .play {
+                /*flex-direction: column;*/
+            }
+        }            
+        
+
+    </style>
 </head>
 <body>
     <h1>Welcome to Rock, Paper, Scissors</h1>
     <h2>Lets Play!</h2>
+
+    <div class="score-board">
+        <div>
+            <label for="">Player Score</label>
+            <p class="player-score">0</p>
+        </div>
+        <div>
+            <label for="">Computer Score</label>
+            <p class="computer-score">0</p>
+        </div>
+        <div>
+            <label for="">Tie Score</label>
+             <p class="tie-score">0</p>
+        </div>
+    </div>
+
+    <div class="display-result">
+    </div>
+
+    <div class="play">
+        <button type="button" class="Rock">Rock</button>
+        <button type="button" class="Paper">Paper</button>
+        <button type="button" class="Scissors">Scissors</button>
+    </div>
+    
+    <div class="round-result">
+    </div>
+   
     <script src="script.js"></script>
     <!-- rewrite the code above and practice the concepts -->
 </body>

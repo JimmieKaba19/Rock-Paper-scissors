@@ -7,8 +7,43 @@ compare users input to computer outcomes
 display messages for each outcome
 */
 
+//buttons call
+const playBtn = document.querySelectorAll("button");
+const displayArea = document.querySelector(".display-result");
+const roundResult = document.querySelector(".round-result");
+const scoreBoard = document.querySelector(".score-board");
+const playerScore = document.querySelector(".player-score");
+const computerScore = document.querySelector(".computer-score");
+const tieScore = document.querySelector(".tie-score");
 
-// randomly generates computer result for executions
+scoreBoard.setAttribute("style", "background-color: #fff; padding: 15px; border: none; margin-top: 20px; color: #1f2937; font-weight: bold; display: flex; gap: 20px; justify-content: center; text-align: center;");
+
+let playerChoice;
+let rounds = 0;
+
+playBtn.forEach((button) => {
+    button.addEventListener("click" ,(event) => {  
+        //style output sections
+        displayArea.setAttribute("style", "background-color: #3882f6; padding: 15px; border: none; margin-top: 20px; text-align: center; font-size: 18px; color: #fff; font-weight: bold;")
+        
+        roundResult.setAttribute("style", "background-color: #fff; padding: 15px; border: none; margin-top: 20px; color: #1f2937; font-weight: bold; text-align: center;"); 
+                
+        playerChoice = button.className;
+        roundResult.textContent = `${playRound(playerSelection, computerSelection)}`;
+        if(playerScore.textContent == 5) {
+            displayArea.textContent = "You Win";
+        } else if (computerScore.textContent == 5) {
+            displayArea.textContent = "You lose";
+        } else if (tieScore.textContent == 5) {
+            displayArea.textContent = "You'll Tied";
+        }else {
+            rounds++
+            displayArea.textContent = `${rounds} round(s) played`;
+        }
+    });
+    
+});  
+
 function getComputerChoice() {
     let computerChoice = Math.random();
     
@@ -21,80 +56,42 @@ function getComputerChoice() {
     }
 }
 
-// inputs player move for evaluation
-function playerMove() {
-    let playerChoice = prompt("Welcome to Rock, Paper, Scissors. Pick your move to continue...");
-    return playerChoice.toLowerCase();
-}
-
-let playerScore = 0;
-let computerScore = 0;
-let tieScore = 0;
 let playerSelection;
 let computerSelection;
 
 //compares player results and computer result
 function playRound(playerSelection, computerSelection){
     //player move
-    playerSelection = playerMove();
+    playerSelection = playerChoice;
+    console.log(playerSelection)
     //computer move
     computerSelection = getComputerChoice();
-
-    if(playerSelection === "rock" && computerSelection === "Rock") {
-        tieScore += 1;
+    console.log(computerSelection)
+    
+    if(playerSelection === computerSelection) {
+        tieScore.textContent++;
         return result = `You have a tie, you picked ${playerSelection} and computer picked ${computerSelection}`;
-    } else if(playerSelection === "rock" && computerSelection == "Scissors"){
-        playerScore += 1;
+    } else if(playerSelection === "Rock" && computerSelection == "Scissors"){
+        playerScore.textContent++;
         return result = `You won, you picked ${playerSelection} and computer picked ${computerSelection}`;
-    } else if (playerSelection === "rock" && computerSelection === "Paper") {
-        computerScore += 1;
+    } else if (playerSelection === "Rock" && computerSelection === "Paper") {
+        computerScore.textContent++;
         return result = `You lost, you picked ${playerSelection} and computer picked ${computerSelection}.`;
-    } else if(playerSelection === "paper" && computerSelection === "Paper") {
-        tieScore += 1;
-        return result = `You have a tie, you picked ${playerSelection} and computer picked ${computerSelection}`;
-    } else if(playerSelection === "paper" && computerSelection == "Rock"){
-        playerScore += 1;
+    } else if(playerSelection === "Paper" && computerSelection == "Rock"){
+        playerScore.textContent++;
         return result = `You won, you picked ${playerSelection} and computer picked ${computerSelection}`;
-    } else if (playerSelection === "paper" && computerSelection === "Scissors") {
-        computerScore += 1;
+    } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
+        computerScore.textContent++;
         return result = `You lost, you picked ${playerSelection} and computer picked ${computerSelection}.`;
-    } else if(playerSelection === "scissors" && computerSelection === "Scissors") {
-        tieScore += 1;
-        return result = `You have a tie, you picked ${playerSelection} and computer picked ${computerSelection}`;
-    } else if(playerSelection === "scissors" && computerSelection == "Paper"){
-        playerScore += 1;
+    } else if(playerSelection === "Scissors" && computerSelection == "Paper"){
+        playerScore.textContent++;
         return result = `You won, you picked ${playerSelection} and computer picked ${computerSelection}`;
-    } else if (playerSelection === "scissors" && computerSelection === "Rock") {
-        computerScore += 1;
+    } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
+        computerScore.textContent++;
         return result = `You lost, you picked ${playerSelection} and computer picked ${computerSelection}.`;
     } else {
         return result = `You entered an unrecognized move ${playerSelection}`
     }
 }
-
-//calls the playround 5 times 
-function playGame() {
-    for (let i = 1; i <= 5; i++){
-        alert(`Game ${i}`)
-        console.log(playRound(playerSelection, computerSelection));
-    }
-
-    tieScore;
-    computerScore;
-    playerScore;
-    alert(`Total Scores:
-    Player score: ${playerScore},
-    Computer score: ${computerScore},
-    Tie score: ${tieScore}.`);
-
-    (playerScore > computerScore && playerScore > tieScore) ? alert("Player Wins!"):
-    (tieScore > computerScore && tieScore > playerScore) ?
-    alert("Result is tie!"):
-    (computerScore > playerScore && computerScore > tieScore) ?
-    alert("Computer Wins!"):
-    alert("You ain't lucky :(")
-}
-
-playGame();
 
 //rewrite the following code above but in simpler more cleaner code
